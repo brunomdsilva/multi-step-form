@@ -34,8 +34,8 @@
 						<button
 							@click.prevent="isLastStep ? submit() : activeStepIndex++"
 							v-text="isLastStep ? 'Confirm' : 'Next Step'"
-							class="px-8 py-3 rounded-lg text-white"
-							:class="isLastStep ? 'bg-primary-purplish-blue' : 'bg-primary-marine-blue'"
+							class="px-8 py-3 rounded-lg text-white hover:bg-opacity-80 transition-colors duration-300"
+							:class="isLastStep ? 'bg-primary-purplish-blue ' : 'bg-primary-marine-blue '"
 						/>
 					</div>
 				</div>

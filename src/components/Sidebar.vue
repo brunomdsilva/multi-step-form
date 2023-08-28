@@ -9,7 +9,7 @@
 			:class="{ 'bg-white/10': index === activeStepIndex }"
 		>
 			<div
-				class="w-10 h-10 flex justify-center items-center rounded-full border border-white font-medium"
+				class="w-10 h-10 flex justify-center items-center rounded-full border border-white font-medium transition-colors duration-300"
 				:class="{ 'bg-primary-light-blue text-primary-marine-blue shadow': index === activeStepIndex }"
 			>
 				<span v-text="index + 1" />
