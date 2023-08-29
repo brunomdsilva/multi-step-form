@@ -30,7 +30,13 @@
 			</div>
 		</div>
 
-		<StepsNavigation :isFirstStep="isFirstStep" :isLastStep="isLastStep" class="p-4 bg-white" @submit="submit()" />
+		<StepsNavigation
+			v-show="!isFormSubmitted"
+			:isFirstStep="isFirstStep"
+			:isLastStep="isLastStep"
+			class="p-4 bg-white"
+			@submit="submit()"
+		/>
 	</div>
 
 	<div class="min-h-screen bg-secondary-magnolia flex justify-center items-center p-4 max-md:hidden">
@@ -42,10 +48,18 @@
 					@change-step="store.goToStep($event)"
 				/>
 
-				<div class="w-full max-w-lg p-4 mx-auto flex flex-col justify-between gap-12">
+				<div
+					class="w-full max-w-lg p-4 mx-auto flex flex-col gap-12"
+					:class="isFormSubmitted ? 'justify-center' : 'justify-between'"
+				>
 					<StepsContent :isFormSubmitted="isFormSubmitted" :activeStep="activeStep" />
 
-					<StepsNavigation :isFirstStep="isFirstStep" :isLastStep="isLastStep" @submit="submit()" />
+					<StepsNavigation
+						v-show="!isFormSubmitted"
+						:isFirstStep="isFirstStep"
+						:isLastStep="isLastStep"
+						@submit="submit()"
+					/>
 				</div>
 			</div>
 		</Container>
