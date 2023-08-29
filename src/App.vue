@@ -1,5 +1,9 @@
 <template>
 	<div class="min-h-screen bg-secondary-magnolia flex justify-center items-center p-4">
+		<div class="fixed left-4 top-4 p-4 bg-white border-2 border-slate-400">
+			<!-- <pre>{{ formStore }}</pre> -->
+		</div>
+
 		<Container>
 			<div class="bg-white rounded-2xl shadow-lg p-4 flex min-h-[650px]">
 				<Sidebar :steps="steps" :activeStepIndex="activeStepIndex" @change-step="activeStepIndex = $event" />
@@ -52,6 +56,8 @@ import Form2 from "@/components/forms/Form2.vue";
 import Form3 from "@/components/forms/Form3.vue";
 import Form4 from "@/components/forms/Form4.vue";
 import { computed, ref } from "vue";
+
+// TODO see how to use pinia
 
 const activeStepIndex = ref(0);
 const steps = ref([
