@@ -1,48 +1,15 @@
 <template>
 	<div class="min-h-screen bg-secondary-magnolia flex justify-center items-center p-4">
-		<div class="fixed left-4 top-4 p-4 bg-white border-2 border-slate-400">
-			<!-- <pre>{{ formStore }}</pre> -->
-		</div>
-
 		<Container>
 			<div class="bg-white rounded-2xl shadow-lg p-4 flex min-h-[650px]">
-				<Sidebar :steps="steps" :activeStepIndex="activeStepIndex" @change-step="activeStepIndex = $event" />
+				<Sidebar
+					:steps="steps"
+					:activeStepIndex="store.activeStepIndex"
+					@change-step="store.goToStep($event)"
+				/>
 
-				<div class="w-full max-w-lg p-6 flex flex-col gap-10 mx-auto">
-					<div class="flex flex-col gap-1">
-						<h2 v-text="activeStep.title" class="text-primary-marine-blue text-3xl font-bold" />
-						<p v-text="activeStep.description" class="text-secondary-cool-gray" />
-					</div>
-
-					<div class="flex-grow">
-						<Transition
-							enter-from-class="opacity-0"
-							leave-to-class="opacity-0"
-							enter-active-class="transition-opacity duration-300"
-							leave-active-class="transition-opacity duration-300"
-							mode="out-in"
-						>
-							<component :is="activeStep.formComponent" />
-						</Transition>
-					</div>
-
-					<div class="flex items-center gap-4" :class="isFirstStep ? 'justify-end' : 'justify-between'">
-						<button
-							v-if="!isFirstStep"
-							@click.prevent="activeStepIndex--"
-							class="p-2 text-secondary-cool-gray hover:text-primary-marine-blue transition-colors duration-300"
-						>
-							Go Back
-						</button>
-
-						<button
-							@click.prevent="isLastStep ? submit() : activeStepIndex++"
-							v-text="isLastStep ? 'Confirm' : 'Next Step'"
-							class="px-8 py-3 rounded-lg text-white hover:bg-opacity-80 transition-colors duration-300"
-							:class="isLastStep ? 'bg-primary-purplish-blue ' : 'bg-primary-marine-blue '"
-						/>
-					</div>
-				</div>
+				<Content v-if="!showThanks" :steps="steps" @submit="submit()" />
+				<Thankyou v-else />
 			</div>
 		</Container>
 	</div>
@@ -51,15 +18,18 @@
 <script setup>
 import Container from "@/components/Container.vue";
 import Sidebar from "@/components/Sidebar.vue";
+import Content from "@/components/Content.vue";
 import Form1 from "@/components/forms/Form1.vue";
 import Form2 from "@/components/forms/Form2.vue";
 import Form3 from "@/components/forms/Form3.vue";
 import Form4 from "@/components/forms/Form4.vue";
-import { computed, ref } from "vue";
+import { ref } from "vue";
+import { useFormStore } from "@/stores/form";
+import Thankyou from "./components/Thankyou.vue";
 
-// TODO see how to use pinia
+const store = useFormStore();
 
-const activeStepIndex = ref(0);
+const showThanks = ref(false);
 const steps = ref([
 	{
 		label: "YOUR INFO",
@@ -87,11 +57,9 @@ const steps = ref([
 	},
 ]);
 
-const activeStep = computed(() => steps.value[activeStepIndex.value]);
-const isFirstStep = computed(() => activeStepIndex.value === 0);
-const isLastStep = computed(() => activeStepIndex.value === steps.value.length - 1);
-
 function submit() {
-	console.log("submit");
+	if (!store.validatePersonalInfo()) return;
+
+	showThanks.value = true;
 }
 </script>

@@ -10,7 +10,10 @@
 			v-maska
 			:data-maska="computedMask"
 			class="px-4 py-3 text-sm rounded-lg border border-secondary-light-gray placeholder-secondary-cool-gray focus:outline-none focus:ring-1 focus:ring-primary-purplish-blue text-primary-marine-blue"
+			:class="{ 'border-primary-strawberry-red': error }"
 		/>
+
+		<span v-if="error" v-text="error" class="text-red-500 text-sm font-bold px-2" />
 	</label>
 </template>
 
@@ -23,6 +26,7 @@ const props = defineProps({
 	modelValue: String,
 	label: String,
 	placeholder: String,
+	error: String,
 	type: {
 		type: String,
 		default: "text",
