@@ -3,7 +3,7 @@
 		<button
 			v-for="addon in store.addons"
 			@click.prevent="store.updateActiveAddons(addon.id)"
-			class="flex items-center gap-6 py-4 px-6 rounded-lg border text-left transition-colors duration-300 hover:border-primary-purplish-blue"
+			class="relative flex items-center gap-4 lg:gap-6 p-4 md:px-6 rounded-lg border text-left transition-colors duration-300 hover:border-primary-purplish-blue"
 			:class="
 				isActiveAddon(addon.id)
 					? 'border-primary-purplish-blue bg-secondary-alabaster'
@@ -22,8 +22,8 @@
 			</div>
 
 			<div class="flex flex-col">
-				<p class="text-primary-marine-blue font-medium text-lg" v-text="addon.title" />
-				<p v-text="addon.description" class="text-secondary-cool-gray" />
+				<p class="text-primary-marine-blue font-medium lg:text-lg" v-text="addon.title" />
+				<p v-text="addon.description" class="text-secondary-cool-gray max-lg:text-sm" />
 			</div>
 
 			<p

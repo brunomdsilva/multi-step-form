@@ -1,10 +1,10 @@
 <template>
 	<div class="flex flex-col gap-8">
-		<div class="grid grid-cols-3 gap-4">
+		<div class="grid lg:grid-cols-3 gap-4">
 			<button
 				v-for="(plan, index) in store.plans"
 				@click.prevent="store.updateActivePlan(index)"
-				class="border p-4 flex flex-col gap-12 rounded-xl text-left transition-colors duration-300 hover:border-primary-purplish-blue"
+				class="border p-4 flex max-lg:items-center lg:flex-col gap-4 lg:gap-12 rounded-xl text-left transition-colors duration-300 hover:border-primary-purplish-blue"
 				:class="
 					store.activePlanIndex === index
 						? 'border-primary-purplish-blue bg-secondary-alabaster'

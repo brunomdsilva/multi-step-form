@@ -6,7 +6,7 @@
 			<p class="font-bold text-3xl text-primary-marine-blue">Thank you!</p>
 
 			<p class="text-secondary-cool-gray">
-				Thanks For conlirrning your Subscription! We hope you have fun using our platform. If you ever need
+				Thanks for confirming your subscription! We hope you have fun using our platform. If you ever need
 				support, please feel free to email us at support@loremgaming.com.
 			</p>
 		</div>
